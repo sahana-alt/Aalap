@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="author" content="aming">
+    <link rel="manifest"  crossorigin="use-credentials" href="/assets/manifest.json?mode=pwa">
+    <link rel="icon" sizes="192x192" href="/assets/img/icon.png?mode=pwa">
+    <link rel="icon" sizes="192x192" href="/assets/img/icon.png?mode=pwa">
+    <meta name="apple-mobile-web-app-title" content="DH">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/img/apple-touch-icon-72x72.png?mode=pwa">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png?mode=pwa">
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon-57x57.png?mode=pwa">
+    <meta name="application-name" content="News App"/>
+    <meta name="msapplication-TileColor" content="#000000"/>
+    <meta name="msapplication-square70x70logo" content="/assets/img/tiny.png?mode=pwa"/>
+    <meta name="msapplication-square150x150logo" content="/assets/img/square.png?mode=pwa"/>
+    <meta name="msapplication-wide310x150logo" content="/assets/img/wide.png?mode=pwa"/>
+    <meta name="msapplication-square310x310logo" content="/assets/img/large.png?mode=pwa"/>
+
+    <title>News Application</title>
+
+</head>
+<style>
+    #app {
+        height: 100%;width: 100%;
+    }
+</style>
+<style>
+    
+    @font-face {
+        /* 95 Heavy */
+        font-family: 'Avenir Heavy';
+        src: url(/assets/fonts/Avenir/Avenir-Heavy.woff) format('woff');
+        font-weight: 900;
+        font-style: normal;
+        font-stretch: normal;
+    }
+
+    @font-face {
+        /* 65 Demi Bold */
+        font-family: 'AvenirNext DemiBold';
+        src: url(/assets/fonts/Avenir-Next/AvenirNext-DemiBold.woff) format('woff');
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+    }
+
+    
+
+</style>
+
+<style>
+    .MuiTypography-colorTextSecondary{
+        color:white;
+    }
+</style>
+<style>
+    .alanBtn-root *{
+        background-color: black;
+        border-radius: 50px;
+        color: white;
+    }
+</style>
+
+    <style>
+        .rbc-btn {
+            color: inherit;
+            font: inherit;
+            margin: 0;
+        }
+
+        button.rbc-btn {
+            overflow: visible;
+            text-transform: none;
+            -webkit-appearance: button;
+            cursor: pointer;
+        }
+
+        button[disabled].rbc-btn {
+            cursor: not-allowed;
+        }
+
+        button.rbc-input::-moz-focus-inner {
+            border: 0;
+            padding: 0;
+        }
+
+        .rbc-calendar {
+            box-sizing: border-box;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .rbc-calendar *,
+        .rbc-calendar *:before,
+        .rbc-calendar *:after {
+            box-sizing: inherit;
+        }
+
+        .rbc-abs-full,
+        .rbc-row-bg {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .rbc-ellipsis,
+        .rbc-event-label,
+        .rbc-row-segment .rbc-event-content,
+        .rbc-show-more {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .rbc-rtl {
+            direction: rtl;
+        }
+
+        .rbc-off-range {
+            color: #999999;
+        }
+
+        .rbc-off-range-bg {
+            background: #e6e6e6;
+        }
+
+        .rbc-header {
+            overflow: hidden;
+            flex: 1 0 0%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 0 3px;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            font-size: 90%;
+            min-height: 0;
+            border-bottom: 1px solid #DDD;
+        }
+
+        .rbc-header+.rbc-header {
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-header+.rbc-header {
+            border-left-width: 0;
+            border-right: 1px solid #DDD;
+        }
+
+        .rbc-header>a,
+        .rbc-header>a:active,
+        .rbc-header>a:visited {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .rbc-row-content {
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+            z-index: 4;
+        }
+
+        .rbc-today {
+            background-color: #eaf6ff;
+        }
+
+        .rbc-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .rbc-toolbar .rbc-toolbar-label {
+            flex-grow: 1;
+            padding: 0 10px;
+            text-align: center;
+        }
+
+        .rbc-toolbar button {
+            color: #373a3c;
+            display: inline-block;
+            margin: 0;
+            text-align: center;
+            vertical-align: middle;
+            background: none;
+            background-image: none;
+            border: 1px solid #ccc;
+            padding: .375rem 1rem;
+            border-radius: 4px;
+            line-height: normal;
+            white-space: nowrap;
+        }
+
+        .rbc-toolbar button:active,
+        .rbc-toolbar button.rbc-active {
+            background-image: none;
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+
+        .rbc-toolbar button:active:hover,
+        .rbc-toolbar button:active:focus,
+        .rbc-toolbar button.rbc-active:hover,
+        .rbc-toolbar button.rbc-active:focus {
+            color: #373a3c;
+            background-color: #d4d4d4;
+            border-color: #8c8c8c;
+        }
+
+        .rbc-toolbar button:focus {
+            color: #373a3c;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+
+        .rbc-toolbar button:hover {
+            color: #373a3c;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+
+        .rbc-btn-group {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .rbc-btn-group>button:first-child:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .rbc-btn-group>button:last-child:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .rbc-rtl .rbc-btn-group>button:first-child:not(:last-child) {
+            border-radius: 4px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .rbc-rtl .rbc-btn-group>button:last-child:not(:first-child) {
+            border-radius: 4px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .rbc-btn-group>button:not(:first-child):not(:last-child) {
+            border-radius: 0;
+        }
+
+        .rbc-btn-group button+button {
+            margin-left: -1px;
+        }
+
+        .rbc-rtl .rbc-btn-group button+button {
+            margin-left: 0;
+            margin-right: -1px;
+        }
+
+        .rbc-btn-group+.rbc-btn-group,
+        .rbc-btn-group+button {
+            margin-left: 10px;
+        }
+
+        .rbc-event {
+            border: none;
+            box-sizing: border-box;
+            box-shadow: none;
+            margin: 0;
+            padding: 2px 5px;
+            background-color: #3174ad;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+        .rbc-slot-selecting .rbc-event {
+            cursor: inherit;
+            pointer-events: none;
+        }
+
+        .rbc-event.rbc-selected {
+            background-color: #265985;
+        }
+
+        .rbc-event:focus {
+            outline: 5px auto #3b99fc;
+        }
+
+        .rbc-event-label {
+            font-size: 80%;
+        }
+
+        .rbc-event-overlaps {
+            box-shadow: -1px 1px 5px 0px rgba(51, 51, 51, 0.5);
+        }
+
+        .rbc-event-continues-prior {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .rbc-event-continues-after {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .rbc-event-continues-earlier {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .rbc-event-continues-later {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .rbc-row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .rbc-row-segment {
+            padding: 0 1px 1px 1px;
+        }
+
+        .rbc-selected-cell {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .rbc-show-more {
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: 4;
+            font-weight: bold;
+            font-size: 85%;
+            height: auto;
+            line-height: normal;
+        }
+
+        .rbc-month-view {
+            position: relative;
+            border: 1px solid #DDD;
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 0;
+            width: 100%;
+            user-select: none;
+            -webkit-user-select: none;
+            height: 100%;
+        }
+
+        .rbc-month-header {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .rbc-month-row {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            flex: 1 0 0;
+            flex-basis: 0px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .rbc-month-row+.rbc-month-row {
+            border-top: 1px solid #DDD;
+        }
+
+        .rbc-date-cell {
+            flex: 1 1 0;
+            min-width: 0;
+            padding-right: 5px;
+            text-align: right;
+        }
+
+        .rbc-date-cell.rbc-now {
+            font-weight: bold;
+        }
+
+        .rbc-date-cell>a,
+        .rbc-date-cell>a:active,
+        .rbc-date-cell>a:visited {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .rbc-row-bg {
+            display: flex;
+            flex-direction: row;
+            flex: 1 0 0;
+            overflow: hidden;
+        }
+
+        .rbc-day-bg {
+            flex: 1 0 0%;
+        }
+
+        .rbc-day-bg+.rbc-day-bg {
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-day-bg+.rbc-day-bg {
+            border-left-width: 0;
+            border-right: 1px solid #DDD;
+        }
+
+        .rbc-overlay {
+            position: absolute;
+            z-index: 5;
+            border: 1px solid #e5e5e5;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+            padding: 10px;
+        }
+
+        .rbc-overlay>*+* {
+            margin-top: 1px;
+        }
+
+        .rbc-overlay-header {
+            border-bottom: 1px solid #e5e5e5;
+            margin: -10px -10px 5px -10px;
+            padding: 2px 10px;
+        }
+
+        .rbc-agenda-view {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 0;
+            overflow: auto;
+        }
+
+        .rbc-agenda-view table.rbc-agenda-table {
+            width: 100%;
+            border: 1px solid #DDD;
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        .rbc-agenda-view table.rbc-agenda-table tbody>tr>td {
+            padding: 5px 10px;
+            vertical-align: top;
+        }
+
+        .rbc-agenda-view table.rbc-agenda-table .rbc-agenda-time-cell {
+            padding-left: 15px;
+            padding-right: 15px;
+            text-transform: lowercase;
+        }
+
+        .rbc-agenda-view table.rbc-agenda-table tbody>tr>td+td {
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-agenda-view table.rbc-agenda-table tbody>tr>td+td {
+            border-left-width: 0;
+            border-right: 1px solid #DDD;
+        }
+
+        .rbc-agenda-view table.rbc-agenda-table tbody>tr+tr {
+            border-top: 1px solid #DDD;
+        }
+
+        .rbc-agenda-view table.rbc-agenda-table thead>tr>th {
+            padding: 3px 5px;
+            text-align: left;
+            border-bottom: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-agenda-view table.rbc-agenda-table thead>tr>th {
+            text-align: right;
+        }
+
+        .rbc-agenda-time-cell {
+            text-transform: lowercase;
+        }
+
+        .rbc-agenda-time-cell .rbc-continues-after:after {
+            content: ' »';
+        }
+
+        .rbc-agenda-time-cell .rbc-continues-prior:before {
+            content: '« ';
+        }
+
+        .rbc-agenda-date-cell,
+        .rbc-agenda-time-cell {
+            white-space: nowrap;
+        }
+
+        .rbc-agenda-event-cell {
+            width: 100%;
+        }
+
+        .rbc-time-column {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .rbc-time-column .rbc-timeslot-group {
+            flex: 1;
+        }
+
+        .rbc-timeslot-group {
+            border-bottom: 1px solid #DDD;
+            min-height: 40px;
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        .rbc-time-gutter,
+        .rbc-header-gutter {
+            flex: none;
+        }
+
+        .rbc-label {
+            padding: 0 5px;
+        }
+
+        .rbc-day-slot {
+            position: relative;
+        }
+
+        .rbc-day-slot .rbc-events-container {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            margin-right: 10px;
+            top: 0;
+        }
+
+        .rbc-day-slot .rbc-events-container.rbc-rtl {
+            left: 10px;
+            right: 0;
+        }
+
+        .rbc-day-slot .rbc-event {
+            border: 1px solid #265985;
+            display: flex;
+            max-height: 100%;
+            min-height: 20px;
+            flex-flow: column wrap;
+            align-items: flex-start;
+            overflow: hidden;
+            position: absolute;
+        }
+
+        .rbc-day-slot .rbc-event-label {
+            flex: none;
+            padding-right: 5px;
+            width: auto;
+        }
+
+        .rbc-day-slot .rbc-event-content {
+            width: 100%;
+            flex: 1 1 0;
+            word-wrap: break-word;
+            line-height: 1;
+            height: 100%;
+            min-height: 1em;
+        }
+
+        .rbc-day-slot .rbc-time-slot {
+            border-top: 1px solid #f7f7f7;
+        }
+
+        .rbc-time-view-resources .rbc-time-gutter,
+        .rbc-time-view-resources .rbc-time-header-gutter {
+            position: sticky;
+            left: 0;
+            background-color: white;
+            border-right: 1px solid #DDD;
+            z-index: 10;
+            margin-right: -1px;
+        }
+
+        .rbc-time-view-resources .rbc-time-header {
+            overflow: hidden;
+        }
+
+        .rbc-time-view-resources .rbc-time-header-content {
+            min-width: auto;
+            flex: 1 0 0;
+            flex-basis: 0px;
+        }
+
+        .rbc-time-view-resources .rbc-time-header-cell-single-day {
+            display: none;
+        }
+
+        .rbc-time-view-resources .rbc-day-slot {
+            min-width: 140px;
+        }
+
+        .rbc-time-view-resources .rbc-header,
+        .rbc-time-view-resources .rbc-day-bg {
+            width: 140px;
+            flex: 1 1 0;
+            flex-basis: 0 px;
+        }
+
+        .rbc-time-header-content+.rbc-time-header-content {
+            margin-left: -1px;
+        }
+
+        .rbc-time-slot {
+            flex: 1 0 0;
+        }
+
+        .rbc-time-slot.rbc-now {
+            font-weight: bold;
+        }
+
+        .rbc-day-header {
+            text-align: center;
+        }
+
+        .rbc-slot-selection {
+            z-index: 10;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 75%;
+            width: 100%;
+            padding: 3px;
+        }
+
+        .rbc-slot-selecting {
+            cursor: move;
+        }
+
+        .rbc-time-view {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            width: 100%;
+            border: 1px solid #DDD;
+            min-height: 0;
+        }
+
+        .rbc-time-view .rbc-time-gutter {
+            white-space: nowrap;
+        }
+
+        .rbc-time-view .rbc-allday-cell {
+            box-sizing: content-box;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .rbc-time-view .rbc-allday-cell+.rbc-allday-cell {
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-time-view .rbc-allday-events {
+            position: relative;
+            z-index: 4;
+        }
+
+        .rbc-time-view .rbc-row {
+            box-sizing: border-box;
+            min-height: 20px;
+        }
+
+        .rbc-time-header {
+            display: flex;
+            flex: 0 0 auto;
+            flex-direction: row;
+        }
+
+        .rbc-time-header.rbc-overflowing {
+            border-right: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-time-header.rbc-overflowing {
+            border-right-width: 0;
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-time-header>.rbc-row:first-child {
+            border-bottom: 1px solid #DDD;
+        }
+
+        .rbc-time-header>.rbc-row.rbc-row-resource {
+            border-bottom: 1px solid #DDD;
+        }
+
+        .rbc-time-header-cell-single-day {
+            display: none;
+        }
+
+        .rbc-time-header-content {
+            flex: 1;
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-time-header-content {
+            border-left-width: 0;
+            border-right: 1px solid #DDD;
+        }
+
+        .rbc-time-header-content>.rbc-row.rbc-row-resource {
+            border-bottom: 1px solid #DDD;
+            flex-shrink: 0;
+        }
+
+        .rbc-time-content {
+            display: flex;
+            flex: 1 0 0%;
+            align-items: flex-start;
+            width: 100%;
+            border-top: 2px solid #DDD;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .rbc-time-content>.rbc-time-gutter {
+            flex: none;
+        }
+
+        .rbc-time-content>*+*>* {
+            border-left: 1px solid #DDD;
+        }
+
+        .rbc-rtl .rbc-time-content>*+*>* {
+            border-left-width: 0;
+            border-right: 1px solid #DDD;
+        }
+
+        .rbc-time-content>.rbc-day-slot {
+            width: 100%;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .rbc-current-time-indicator {
+            position: absolute;
+            z-index: 3;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: #74ad31;
+            pointer-events: none;
+        }
+
+    </style>
+    <style>
+        .widgetPage {
+            position: relative;
+        }
+
+        .widgetPage .anticon-double-left {
+            width: 33px;
+            height: 42px;
+            background-color: #fff;
+            font-size: 18px;
+            border: solid 1px rgba(205, 208, 227, 0.3);
+            border-left: solid 1px rgba(205, 208, 227, 0.3);
+            box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.08);
+            padding: 11px 0px;
+            cursor: pointer;
+            position: absolute;
+            left: 100%;
+            top: 2%;
+        }
+
+        .widget {
+            background-color: #fff;
+            border: 1px solid rgba(205, 208, 227, 0.3);
+            border-radius: 4px;
+            box-shadow: rgba(0, 0, 0, 0.08) 0px 12px 14px 0px;
+            margin-left: -48px;
+            margin-top: -27px;
+            padding: 17px 26px 17px 21px;
+        }
+
+    </style>
+
+
+    <!-- Calendar Widget Style -->
+    <style>
+        .calendarWidget .anticon-double-left {
+            top: 25%;
+        }
+
+        .rbc-toolbar {
+            justify-content: left;
+        }
+
+        .rbc-toolbar span {
+            padding: 10px 0px;
+        }
+
+        .rbc-calendar {
+            /* height: 42%; */
+            height: 90%;
+        }
+
+        .rbc-month-view,
+        .rbc-header,
+        .rbc-header+.rbc-header,
+        .rbc-month-row+.rbc-month-row,
+        .rbc-day-bg+.rbc-day-bg {
+            border: 0;
+        }
+
+        .rbc-calendar .rbc-header span {
+            font-family: 'AvenirNext DemiBold';
+            font-size: 13px;
+            color: #989db3;
+        }
+
+        .rbc-calendar .rbc-row-content {
+            text-align-last: center;
+        }
+
+        .rbc-calendar .rbc-month-row {
+            justify-content: center;
+        }
+
+        .rbc-calendar .rbc-month-row a {
+            font-family: 'Avenir Heavy';
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .rbc-calendar .rbc-today,
+        .rbc-calendar .rbc-off-range-bg {
+            background-color: transparent;
+        }
+
+        .rbc-calendar .rbc-off-range a {
+            color: #999999;
+            background-color: #e6e6e6;
+            padding: 6px 8px;
+        }
+
+        .rbc-calendar .rbc-now.rbc-current a {
+            font-family: 'AvenirNext DemiBold';
+            color: #fff;
+            background-color: #4d6eff;
+            padding: 6px 8px;
+            border-radius: 10px;
+        }
+
+    </style>
+
+    <!--Weather-->
+    <style>
+   
+  .inline-input {
+    align-items: flex-start;
+    border-bottom: 1px dotted #fff;
+    display: flex;
+    margin: 0.5rem 0 1.5rem 0;
+  }
+  
+  .inline-input:focus-within {
+    border-bottom: 1px dotted #333;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .inline-input .mdi-icon {
+    color: #fff;
+    padding: 0.2rem 0.5rem 0 0;
+  }
+  
+  .location-input {
+    display: flex;
+    align-items: flex-start;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    max-width: 16rem;
+    outline: none;
+    padding-bottom: 0.3rem;
+  }
+  
+  .main-display {
+    align-items: flex-start;
+    display: flex;
+    justify-content: start;
+    margin: 0.5rem 0 0.5rem 0;
+  }
+  
+  .main-info {
+    align-items: flex-start;
+    display: flex;
+    justify-content: start;
+    order: 0;
+  }
+  
+  .temp-measurement {
+    color: #333;
+    font-size: 5rem;
+    font-weight: 500;
+    line-height: 0.85;
+  }
+  
+  .temp-unit {
+    vertical-align: top;
+  }
+  
+  .sub-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0 0 0 0.8rem;
+    order: 1;
+  }
+  
+  .sub-info-title {
+    font-size: 1.15rem;
+    margin: 0 0 0.3rem 0;
+    text-align: start;
+  }
+  
+  .sub-info-text {
+    font-size: 0.7rem;
+    color: #333;
+    margin: 0 0 0.4rem 0;
+    text-align: start;
+  }
+  
+  .sub-info-text .max-temp {
+    /*     font-weight: 700; */
+    margin: 0 0.5rem 0 -0.1rem;
+  }
+  
+  .selection-panel {
+    margin: 1.8rem 0 1.8rem -0.6rem;
+  }
+  
+  .selection-row {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin: 0.2rem 0 0 0;
+    flex-direction: row;
+  }
+  
+  .selection-days {
+    color: #333;
+    font-size: 0.7rem;
+    font-weight: 700;
+    width: 3.5rem;
+  }
+  
+  .selection-weather {
+    color: #333;
+    font-size: 0.7rem;
+    width: 3.5rem;
+  }
+  
+  .selection-icons {
+    color: #333;
+    font-size: 1.7rem;
+    width: 3.5rem;
+  }
+  
+  .selected {
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cloudy {
+    background-image: linear-gradient(0deg, #bbdefb, #2196f3);
+  }
+  
+  .clear {
+    background-image: linear-gradient(0deg, #b3e5fc, #29b6f6);
+  }
+  
+  .snow {
+    background-image: linear-gradient(0deg, #b2ebf2, #26c6da);
+  }
+  
+  .rain {
+    background-image: linear-gradient(0deg, #c5cae9, #5c6bc0);
+  }
+  
+  .thunderstorm {
+    background-image: linear-gradient(0deg, #e0e0e0, #757575);
+  }
+    </style>
+
+    <!--Laptop/Desktop CSS-->
+    <style>
+        @media only screen and (min-width: 780px) {
+            .main{
+                height: 700px;
+                background-size: 100%;
+                background-image: url(https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg);
+            }
+            .slider{
+                height: 700px;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-image: url(https://i.pinimg.com/originals/b8/cd/51/b8cd5130bfd048300026faa0475dd97b.jpg);
+            }
+            .app-name{
+                color: white;
+                font-size: 120px;
+                font-style: italic;
+                margin-left: 48%;
+                margin-top: 150px;
+            }
+            .app-desc{
+                color: white;
+                font-size: 58px;
+                font-style: italic;
+                margin-left: 48%;
+                margin-top: 0px;
+            }
+            .loader{
+                margin-left: 50%; 
+            }
+            .weather{
+                margin-top: 70px;
+            }
+            .home-1{
+                height: 70px;
+                background-image: url(https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg);
+            }
+            .home-2{
+                margin-top: 0px;
+                font-size: 80px;
+                font-style: italic;
+                font-weight: 500;
+                text-align: center;
+                color: black;
+            }
+            .iLnpKR {
+            margin-left:80%;
+            margin-top: -10.5%;
+            }
+            .fDeflT{
+            margin-left:80%;
+            margin-top: -14.5%;
+            }
+            .home-3{
+                margin-left: 90%;
+            }
+            .home-4{
+                margin-right: 15px;
+                margin-top: -70px;
+                font-size: 30px;
+                font-style: italic;
+                font-weight: 500;
+                text-align: right;
+                color: black;
+            }
+            .home-6{
+                margin-left: 20px;
+            }
+            .home-7{
+                height: 100px;
+                margin-top: 30px;
+            }
+            .MuiDrawer-paper{
+            width:30%;
+            background-image: url("https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg")
+        }
+            .title {
+             margin-top: -20px;
+            }
+            .makeStyles-container-17{
+                margin-top: 40px;
+            }
+            div.slide-left {
+            width:100%;
+            overflow:hidden;
+            }
+            div.slide-left p {
+            animation: slide-left 5s;
+            }
+            
+            @keyframes slide-left {
+            from {
+                margin-left: 100%;
+                width: 300%; 
+            }
+            
+            to {
+                margin-left: 48%;
+                width: 100%;
+            }
+            }
+            div.slide-left1 {
+            width:100%;
+            overflow:hidden;
+            }
+            div.slide-left1 p {
+            animation: slide-left1 3s;
+            }
+            
+            @keyframes slide-left1 {
+            from {
+                margin-left: 100%;
+                width: 300%; 
+            }
+            
+            to {
+                margin-left: 48%;
+                width: 100%;
+            }
+            }
+            }
+    </style>
+
+    <!--Mobile Css-->
+    <style>
+        @media only screen and (max-width: 500px) {
+            .main{
+                height: 100%;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-image: url(https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg);
+            }
+            .slider{
+                height: 640px;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-image: url(https://i.pinimg.com/originals/b8/cd/51/b8cd5130bfd048300026faa0475dd97b.jpg);
+            }
+            .app-name{
+                color: white;
+                font-size: 60px;
+                font-style: italic;
+                margin-left: 28%;
+                margin-top: 150px;
+            }
+            .app-desc{
+                color: white;
+                font-size: 48px;
+                font-style: italic;
+                margin-left: 18%;
+                margin-top: 0px;
+            }
+            .loader{
+                margin-left: 30%; 
+            }
+            .home-1{
+                height: 40px;
+                background-image: url(https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg);
+            }
+            .home-2{
+                margin-top: 0px;
+                font-size: 60px;
+                margin-left: 40px;
+                font-style: italic;
+                font-weight: 500;
+                text-align: center;
+                color: black;
+            }
+            .iLnpKR {
+            margin-left:60%;
+            margin-top: -12.5%;
+            }
+            .home-3{
+                margin-left: 0%;
+            }
+            .home-4{
+                margin-right: 60%;
+                margin-top: -70px;
+                font-size: 30px;
+                font-style: italic;
+                font-weight: 500;
+                text-align: right;
+                color: black;
+            }
+            .home-6{
+                margin-left: 20px;
+            }
+            .home-7{
+                margin-top: 80px;
+            }
+            .MuiDrawer-paper{
+            width:100%;
+            background-image: url("https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg")
+        }
+           
+            div.slide-left {
+            width:100%;
+            overflow:hidden;
+            }
+            div.slide-left p {
+            animation: slide-left 5s;
+            }
+            
+            @keyframes slide-left {
+            from {
+                margin-left: 100%;
+                width: 300%; 
+            }
+            
+            to {
+                margin-left: 28%;
+                width: 100%;
+            }
+            }
+            div.slide-left1 {
+            width:100%;
+            overflow:hidden;
+            }
+            div.slide-left1 p {
+            animation: slide-left1 3s;
+            }
+            
+            @keyframes slide-left1 {
+            from {
+                margin-left: 100%;
+                width: 300%; 
+            }
+            
+            to {
+                margin-left: 18%;
+                width: 100%;
+            }
+            }
+        }
+    </style>
+    <!--Tablet Css-->
+    <style>
+        @media only screen and (min-width: 600px) and (max-width: 769px) {
+            .calendarWidget{
+                margin-top: -50px;
+            }
+            .weather{
+                margin-top: 250px;
+            }
+            .main{
+                
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-image: url(https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg);
+            }
+            .slider{
+                height: 1024px;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-image: url(https://i.pinimg.com/originals/b8/cd/51/b8cd5130bfd048300026faa0475dd97b.jpg);
+            }
+            .app-name{
+                color: white;
+                font-size: 90px;
+                font-style: italic;
+                margin-left: 28%;
+                margin-top: 300px;
+            }
+            .app-desc{
+                color: white;
+                font-size: 60px;
+                font-style: italic;
+                margin-left: 18%;
+                margin-top: 0px;
+            }
+            .loader{
+                margin-left: 30%; 
+            }
+            .home-1{
+                height: 70px;
+                background-image: url(https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg);
+            }
+            .home-2{
+                margin-top: 0px;
+                font-size: 80px;
+                margin-left: 20px;
+                font-style: italic;
+                font-weight: 500;
+                text-align: center;
+                color: black;
+            }
+            .iLnpKR {
+            margin-left:85%;
+            margin-top: -20%;
+            }
+            .home-3{
+                margin-left: 0%;
+            }
+            .home-4{
+                margin-right: 42%;
+                margin-top: -40px;
+                font-size: 30px;
+                font-style: italic;
+                font-weight: 500;
+                text-align: right;
+                color: black;
+            }
+            .home-6{
+                margin-left: 20px;
+            }
+            .home-7{
+                margin-top: 30px;
+            }
+            .MuiDrawer-paper{
+            width:50%;
+            background-image: url("https://www.syniverse.com/blog/wp-content/uploads/2018/08/Grey_Routes_Threat-Banner.jpg")
+        }
+        .widget {
+            margin-top: 200px;
+        }
+           
+            div.slide-left {
+            width:100%;
+            overflow:hidden;
+            }
+            div.slide-left p {
+            animation: slide-left 5s;
+            }
+            
+            @keyframes slide-left {
+            from {
+                margin-left: 100%;
+                width: 300%; 
+            }
+            
+            to {
+                margin-left: 28%;
+                width: 100%;
+            }
+            }
+            div.slide-left1 {
+            width:100%;
+            overflow:hidden;
+            }
+            div.slide-left1 p {
+            animation: slide-left1 3s;
+            }
+            
+            @keyframes slide-left1 {
+            from {
+                margin-left: 100%;
+                width: 300%; 
+            }
+            
+            to {
+                margin-left: 18%;
+                width: 100%;
+            }
+            }
+        }
+    </style>
+<body>
+<div id="app"></div>
+  <script src="/assets/idb/lib/idb.js?mode=pwa" async></script>
+  <script src="https://apis.google.com/js/client.js"></script>
+</body>
+</html>
